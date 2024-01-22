@@ -1,5 +1,7 @@
 package com.luminahi;
 
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +16,11 @@ public class Main {
     
     @GetMapping("/greet")
     public GreetResponse greet() {
-        return new GreetResponse("hello");
+        return new GreetResponse(
+                "hello",
+                List.of("TypeScript", "C", "Csharp", "Java"),
+                new Person("alex", 20, "programmer")
+        );
     }
     
     @GetMapping("/")
@@ -22,6 +28,11 @@ public class Main {
         return new Person("alex", 20, "programmer");
     }
     
-    record GreetResponse(String greet) {}
+    record GreetResponse(
+            String greet,
+            List<String> favoriteProgrammingLanguages,
+            Person person
+        ) {}
+    
     record Person(String name, int age, String profession) {}
 }
