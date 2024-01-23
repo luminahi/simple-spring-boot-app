@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/customers")
 public class MainController {
     
-    private final CustomerRepository customerRepository;
+    private final MainService service;
     
-    public MainController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public MainController(MainService service) {
+        this.service = service;
     }
     
     @GetMapping("/")
     public List<Customer> getAllCostumers() {
-        return customerRepository.findAll();
+        return service.getCustomerRepository().findAll();
     }
     
     @PostMapping("/")
@@ -32,23 +32,23 @@ public class MainController {
         customer.setName(body.name());
         customer.setAge(body.age());
         customer.setEmail(body.email());
-        customerRepository.save(customer);
+        service.getCustomerRepository().save(customer);
     }
     
     @DeleteMapping("{customerId}")
     public void deleteCustomer(@PathVariable("customerId") int id) {  
-        customerRepository.deleteById(id);
+        service.getCustomerRepository().deleteById(id);
     }
     
     @PutMapping("{customerId}")
     public void updateCustomer(@PathVariable("customerId") int id, @RequestBody NewCustomerRequest body) {
-        Customer existingCustomer = customerRepository.getReferenceById(id);
+        Customer existingCustomer = service.getCustomerRepository().getReferenceById(id);
         if (body.email() != null)
             existingCustomer.setEmail(body.email());
         if (body.name() != null)
             existingCustomer.setName(body.name());
         if (body.age() != null)
             existingCustomer.setAge(body.age());
-        customerRepository.save(existingCustomer);
+        service.getCustomerRepository().save(existingCustomer);
     }
 }
