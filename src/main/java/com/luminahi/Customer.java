@@ -20,13 +20,13 @@ public class Customer {
             strategy = GenerationType.SEQUENCE,
             generator = "customer_id_sequence"
     )
-    private int id;
+    private Integer id;
     private String name;
-    private int age;
+    private Integer age;
     private String email;
 
 
-    public Customer(int id, String name, int age, String email) {
+    public Customer(Integer id, String name, Integer age, String email) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -35,11 +35,11 @@ public class Customer {
     
     public Customer() {}
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -51,11 +51,11 @@ public class Customer {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
